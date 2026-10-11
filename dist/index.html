@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#254ce5">
+  <meta name="theme-color" content="#fafafa">
   <meta name="description" content="buy-great-things，一本认真记录制造地、材质、工艺与品质证据的商品档案。">
   <title>buy-great-things · 好东西，经得起细看</title>
   <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
@@ -13,7 +13,7 @@
 </head>
 <body>
   <header class="header">
-    <a class="brand" href="#" aria-label="buy-great-things 首页"><span class="brand-mark">✳</span><span>buy great things<span class="brand-dot">.</span></span></a>
+    <a class="brand" href="#" aria-label="buy-great-things 首页">buy-great-things<span class="brand-caption">商品档案</span></a>
     <nav aria-label="主导航">
       <a href="#archive" class="nav-link">商品档案</a>
       <button class="nav-link" id="standards-nav">收录标准</button>
@@ -23,38 +23,32 @@
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> THE OBJECT ARCHIVE <span class="edition">初版 · 2026</span></div>
-        <h1 id="hero-title">好东西，<br>经得起<span class="title-em">细看<svg viewBox="0 0 250 20" aria-hidden="true"><path d="M4 14Q120-3 244 10"/></svg></span>。</h1>
-        <p class="hero-description">把制造地、材质和工艺摊开来看。<br>留下一份有依据的商品档案。</p>
-        <a href="#archive" class="primary">翻开商品档案 <span aria-hidden="true">↗</span></a>
-        <div class="hero-footnote"><span class="mini-cross">+</span> 少一点噱头，多一点依据。</div>
+        <h1 id="hero-title">好东西，经得起细看。</h1>
+        <p class="hero-description">记录制造地、材质、工艺与核验依据。</p>
       </div>
-      <button class="hero-object" id="hero-object" aria-label="查看 HARIO V60 陶瓷滤杯档案">
-        <div class="object-heading"><span>OBJECT STUDY / 001</span><span class="object-tag">咖啡器具</span></div>
-        <div class="object-canvas"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><img src="./assets/hario.webp" alt="HARIO V60 陶瓷滤杯" class="hero-image" fetchpriority="high"><span class="spec spec-a"><i></i>瓷器 · PORCELAIN</span><span class="spec spec-b"><i></i>日本制造</span></div>
-        <div class="object-caption"><div><strong>HARIO V60</strong><span>陶瓷滤杯 / 02</span></div><span class="circle-arrow" aria-hidden="true">↗</span></div>
-      </button>
+      <p class="intro-policy">优先非中国制造<br><span>依据具体型号与制造说明收录</span></p>
     </section>
-    <div class="principle-strip"><span><i>◎</i> 制造地有据可查</span><span><i>◇</i> 材质工艺具体记录</span><span><i>↗</i> 优点与局限一起看</span><span class="strip-end">优先非中国制造 · 极少数品质例外</span></div>
     <section class="archive" id="archive" aria-labelledby="archive-title">
-      <div class="section-heading"><div><div class="eyebrow">THE COLLECTION</div><h2 id="archive-title">商品档案<span id="total-count"></span></h2></div><p>从一件物品，认识一种品质。</p></div>
-      <div class="archive-toolbar">
-        <div class="categories" id="categories" role="group" aria-label="商品类别"></div>
+      <div class="section-heading"><h2 id="archive-title">档案目录<span id="total-count"></span></h2><p class="eyebrow">THE OBJECT ARCHIVE / 2026</p></div>
+      <div class="browse-controls">
+        <div class="archive-toolbar">
         <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5"/></svg><input id="search" type="search" placeholder="搜索品牌、型号、材质" aria-label="搜索品牌、型号、材质"></label>
+          <div class="categories" id="categories" role="group" aria-label="商品类别"></div>
+        </div>
+        <div class="filter-row"><div class="filter-controls"><label>制造地 <select id="country"><option value="all">全部制造地</option><option value="日本">日本</option><option value="法国">法国</option><option value="德国">德国</option><option value="瑞士">瑞士</option><option value="英国">英国</option></select></label><label class="saved-filter"><input id="saved-only" type="checkbox"> 只看收藏</label></div><span id="result-count" role="status" aria-live="polite"></span></div>
       </div>
-      <div class="filter-row"><div class="filter-controls"><label>制造地 <select id="country"><option value="all">全部制造地</option><option value="日本">日本</option><option value="法国">法国</option><option value="德国">德国</option><option value="瑞士">瑞士</option><option value="英国">英国</option></select></label><label class="saved-filter"><input id="saved-only" type="checkbox"> 只看收藏</label></div><span id="result-count" role="status" aria-live="polite"></span></div>
-      <div class="catalog-note"><span class="note-dot"></span> 初版资料档案 · 已查阅品牌制造说明，独立品质核验待补充。收录不等于品质认证。</div>
+      <div class="catalog-note">当前为资料建档阶段，独立品质核验待补充。</div>
       <div class="product-grid" id="product-grid"></div>
       <div class="empty" id="empty" hidden><span>⌕</span><h3>暂时没有这样的档案</h3><p>换个关键词或筛选条件，继续翻一翻。</p><button id="reset-filters" class="text-button">清除筛选 ↗</button></div>
     </section>
     <section class="standards" id="standards" aria-labelledby="standards-title">
-      <div class="standards-lead"><span class="eyebrow">OUR EDITORIAL STANDARD</span><h2 id="standards-title">品质不是一句话。<br>是经得起追问的细节。</h2><p>先确认它是什么、在哪里制造，再记录它为何值得被研究。</p><button class="text-button" id="standards-more">查看完整收录标准 ↗</button></div>
-      <div class="standards-list"><article><span>01</span><div><h3>查制造地，不猜品牌国籍</h3><p>记录具体型号的制造说明。不同系列、版本和批次分别核验。</p></div></article><article><span>02</span><div><h3>有依据，才谈品质</h3><p>材质、工艺、独立测试和长期表现分别记录，厂商描述不当作实测结果。</p></div></article><article><span>03</span><div><h3>严格收录，保留例外</h3><p>优先非中国制造。中国制造仅在同类品质冠绝、证据充分时破例。</p></div></article></div>
+      <div class="standards-lead"><span class="eyebrow">EDITORIAL STANDARD</span><h2 id="standards-title">收录与核验</h2><p>每份档案明确资料范围，保留尚未确认的信息。</p><button class="text-button" id="standards-more">完整收录标准</button></div>
+      <div class="standards-list"><article><h3>制造地</h3><p>核对具体型号与版本。品牌国籍不能替代制造地。</p></article><article><h3>品质证据</h3><p>分别记录材质、工艺、独立测试与长期表现，厂商说明不作为实测结论。</p></article><article><h3>收录例外</h3><p>中国制造仅在同类品质冠绝且证据充分时破例。</p></article></div>
     </section>
   </main>
-  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✳</span><span>buy great things.</span></a><p>好东西，值得认真记录。</p><span>独立商品档案 · 2026</span></footer>
-  <dialog id="detail-dialog" aria-labelledby="detail-title"><button class="dialog-close" aria-label="关闭档案">×</button><div id="detail-content"></div></dialog>
-  <dialog id="standards-dialog" aria-labelledby="rules-title"><button class="dialog-close" aria-label="关闭标准">×</button><div class="rules-content"><span class="eyebrow">EDITORIAL POLICY</span><h2 id="rules-title">我们的收录标准</h2><p>这是商品资料库。页面不销售商品，不提供购买渠道或外部购买跳转。</p><h3>制造地</h3><p>优先收录有具体制造依据的非中国制造商品。品牌总部所在地不等于制造地；品牌整体说明只标注为品牌级依据，不能替代型号及批次核验。</p><h3>品质与例外</h3><p>品质结论需要可复核的材质与工艺资料、独立测试及长期使用证据。中国制造商品只有在同类品质冠绝且依据充分时才可破例，必须记录同类对照和审核说明。</p><h3>状态透明</h3><p>“资料建档”表示已有初步资料，不表示完成独立质量核验。“品质审定”需要完整证据与人工审核。首批档案均处于资料建档阶段。</p><h3>持续修订</h3><p>每份档案记录核验日期、证据范围与资料缺口。制造地变化或证据失效时重新审查。</p></div></dialog>
+  <footer><a class="brand footer-brand" href="#">buy-great-things</a><span>独立商品档案 / 2026</span></footer>
+  <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-toolbar"><span>商品档案</span><button class="dialog-close" aria-label="关闭档案">关闭 ×</button></div><div id="detail-content" class="dialog-scroll"></div></dialog>
+  <dialog id="standards-dialog" aria-labelledby="rules-title"><div class="dialog-toolbar"><span>收录标准</span><button class="dialog-close" aria-label="关闭标准">关闭 ×</button></div><div class="dialog-scroll rules-content"><span class="eyebrow">EDITORIAL POLICY</span><h2 id="rules-title">我们的收录标准</h2><p>这是商品资料库。页面不销售商品，不提供购买渠道或外部购买跳转。</p><h3>制造地</h3><p>优先收录有具体制造依据的非中国制造商品。品牌总部所在地不等于制造地；品牌整体说明只标注为品牌级依据，不能替代型号及批次核验。</p><h3>品质与例外</h3><p>品质结论需要可复核的材质与工艺资料、独立测试及长期使用证据。中国制造商品只有在同类品质冠绝且依据充分时才可破例，必须记录同类对照和审核说明。</p><h3>状态透明</h3><p>“资料建档”表示已有初步资料，不表示完成独立质量核验。“品质审定”需要完整证据与人工审核。首批档案均处于资料建档阶段。</p><h3>持续修订</h3><p>每份档案记录核验日期、证据范围与资料缺口。制造地变化或证据失效时重新审查。</p></div></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>

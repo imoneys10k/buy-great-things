@@ -20,9 +20,9 @@ function render() {
   const matches = products.filter((p) => (category === '全部' || p.category === category) && (country === 'all' || p.country === country) && (!$('#saved-only').checked || saved.has(p.id)) && [p.brand,p.name,p.model,p.material,p.country,p.category].join(' ').toLocaleLowerCase().includes(query));
   $('#result-count').textContent = `${matches.length} 份档案`;
   $('#empty').hidden = matches.length > 0;
-  $('#product-grid').innerHTML = matches.map((p) => `<article class="product-card">
-    <div class="product-visual" style="--card-bg:${p.color}"><span class="product-number">BGT / ${String(products.indexOf(p)+1).padStart(3,'0')}</span><button class="product-image-button" data-detail="${p.id}" aria-label="查看${escapeHtml(p.name)}档案"><img class="product-image" src="./assets/${p.image}" alt="${escapeHtml(p.brand+' '+p.name)}" loading="lazy" width="400" height="300"></button><button class="save-button" data-save="${p.id}" aria-label="${saved.has(p.id)?'取消收藏':'收藏'}${escapeHtml(p.name)}" aria-pressed="${saved.has(p.id)}">${bookmark}</button></div>
-    <div class="product-info"><div class="card-topline"><span class="product-brand">${p.brand}</span><span class="country-label"><i></i>${p.country}${p.id==='lamy'?' · 品牌级资料':'制造'}</span></div><button class="product-title" data-detail="${p.id}">${escapeHtml(p.name)}</button><p class="product-description">${escapeHtml(p.description)}</p><div class="card-bottom"><span class="material-label">${escapeHtml(p.material)}</span><button class="detail-link" data-detail="${p.id}">查看档案 ↗</button></div></div>
+  $('#product-grid').innerHTML = matches.map((p, index) => `<article class="product-card">
+    <div class="product-visual"><span class="product-number">BGT / ${String(products.indexOf(p)+1).padStart(3,'0')}</span><button class="product-image-button" data-detail="${p.id}" aria-label="查看${escapeHtml(p.name)}档案"><img class="product-image" src="./assets/${p.image}" alt="${escapeHtml(p.brand+' '+p.name)}" loading="${index < 3 ? 'eager' : 'lazy'}" ${index === 0 ? 'fetchpriority="high"' : ''} width="400" height="300"></button><button class="save-button" data-save="${p.id}" aria-label="${saved.has(p.id)?'取消收藏':'收藏'}${escapeHtml(p.name)}" aria-pressed="${saved.has(p.id)}">${bookmark}</button></div>
+    <div class="product-info"><div class="card-topline"><span class="product-brand">${p.brand}</span><span class="country-label">${p.country}${p.id==='lamy'?' · 品牌资料':'制造'}</span></div><button class="product-title" data-detail="${p.id}">${escapeHtml(p.name)}</button><p class="material-label">${escapeHtml(p.material)}</p><div class="card-evidence"><div><span>制造依据</span><span>${escapeHtml(p.originScope)}</span></div><div><span>品质状态</span><span>待独立核验</span></div></div><div class="card-bottom"><span class="archive-status">资料建档</span><button class="detail-link" data-detail="${p.id}">查看档案 <span aria-hidden="true">→</span></button></div></div>
   </article>`).join('');
   updateSavedCount();
 }
@@ -51,10 +51,10 @@ function showDetail(id) {
   const p = products.find((item) => item.id === id);
   if (!p) return;
   activeProduct = id;
-  $('#detail-content').innerHTML = `<div class="detail-cover" style="--card-bg:${p.color}"><img src="./assets/${p.image}" alt="${escapeHtml(p.name)}"></div><div class="detail-body"><div class="detail-brand">${p.brand}</div><div class="detail-heading"><h2 id="detail-title">${escapeHtml(p.name)}</h2><button class="save-detail" data-save="${p.id}" aria-pressed="false">收藏档案 +</button></div><div class="detail-model">${escapeHtml(p.model)}</div><dl class="detail-facts"><div><dt>制造地资料</dt><dd>${p.country}${p.id==='lamy'?' · 品牌级说明':''}</dd></div><div><dt>材质</dt><dd>${escapeHtml(p.material)}</dd></div><div><dt>档案类别</dt><dd>${p.category}</dd></div></dl><div class="detail-section"><h3>物品记录</h3><p>${escapeHtml(p.description)}</p></div><div class="detail-section"><h3>资料中已确认</h3><ul>${p.facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul></div><div class="detail-section"><h3>使用与核验边界</h3><p>${escapeHtml(p.limitation)}</p></div><div class="evidence"><h3>资料依据 <span class="status">${p.status}</span></h3><p>来源：${escapeHtml(p.source)}</p><p>制造地依据范围：${escapeHtml(p.originScope)}</p><p>查阅日期：${p.checked}</p><p>待补充：${escapeHtml(p.pending)}</p><p>本档案未完成独立品质核验，不构成正品或品质认证。图片为品牌资料图，具体款式以文字型号为准。</p></div></div>`;
+  $('#detail-content').innerHTML = `<div class="detail-cover"><img src="./assets/${p.image}" alt="${escapeHtml(p.name)}"></div><div class="detail-body"><div class="detail-brand">${p.brand}</div><div class="detail-heading"><h2 id="detail-title">${escapeHtml(p.name)}</h2><button class="save-detail" data-save="${p.id}" aria-pressed="false">收藏档案 +</button></div><div class="detail-model">${escapeHtml(p.model)}</div><dl class="detail-facts"><div><dt>制造地资料</dt><dd>${p.country}${p.id==='lamy'?' · 品牌级说明':''}</dd></div><div><dt>材质</dt><dd>${escapeHtml(p.material)}</dd></div><div><dt>档案类别</dt><dd>${p.category}</dd></div></dl><div class="detail-section"><h3>物品记录</h3><p>${escapeHtml(p.description)}</p></div><div class="detail-section"><h3>资料中已确认</h3><ul>${p.facts.map((fact) => `<li>${escapeHtml(fact)}</li>`).join('')}</ul></div><div class="detail-section"><h3>使用与核验边界</h3><p>${escapeHtml(p.limitation)}</p></div><div class="evidence"><h3>资料依据 <span class="status">${p.status}</span></h3><p>来源：${escapeHtml(p.source)}</p><p>制造地依据范围：${escapeHtml(p.originScope)}</p><p>查阅日期：${p.checked}</p><p>待补充：${escapeHtml(p.pending)}</p><p>本档案未完成独立品质核验，不构成正品或品质认证。图片为品牌资料图，具体款式以文字型号为准。</p></div></div>`;
   updateDetailSave();
   if (!$('#detail-dialog').open) $('#detail-dialog').showModal();
-  $('#detail-dialog').scrollTop = 0;
+  $('#detail-content').scrollTop = 0;
 }
 $('#categories').addEventListener('click', (event) => {
   const button = event.target.closest('[data-category]');
@@ -69,7 +69,6 @@ document.addEventListener('click', (event) => {
   const detail = event.target.closest('[data-detail]');
   if (detail) showDetail(detail.dataset.detail);
 });
-$('#hero-object').addEventListener('click', () => showDetail('hario'));
 ['search','country','saved-only'].forEach((id) => $(`#${id}`).addEventListener(id === 'search' ? 'input' : 'change', render));
 $('#saved-nav').addEventListener('click', () => {
   $('#saved-only').checked = !$('#saved-only').checked;
