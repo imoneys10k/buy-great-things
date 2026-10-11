@@ -1,15 +1,17 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
+import {validatePublic} from '../backend/catalog.mjs';
 const context = {window:{}};
 vm.runInNewContext(fs.readFileSync('dist/products.js','utf8'), context);
 const products = context.window.PRODUCTS;
+validatePublic(products);
 assert.equal(new Set(products.map(p=>p.id)).size,products.length);
 for (const p of products) {
   for (const field of ['id','brand','name','model','country','material','source','originScope','checked','pending','status']) assert.ok(p[field],`${p.id}: missing ${field}`);
   assert.ok(fs.existsSync(`dist/assets/${p.image}`),`${p.id}: missing image`);
-  assert.equal(p.status,'资料建档',`${p.id}: initial entries are not independently verified`);
-  assert.ok(!['中国','China','CN'].includes(p.country),`${p.id}: requires documented exception review`);
+  assert.ok(['资料建档','品质审定'].includes(p.status),`${p.id}: invalid verification state`);
+  if(p.country==='中国')assert.ok(p.exceptionReviewed&&p.status==='品质审定'&&p.exceptionNote,`${p.id}: requires reviewed exception`);
 }
 const html = fs.readFileSync('dist/index.html','utf8');
 assert.ok(!/href=["']https?:/i.test(html),'No external visitor links');

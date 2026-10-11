@@ -20,7 +20,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
+      - name: Verify backend workflow
+        run: npm test
+      - name: Generate public catalog
+        run: npm run build
       - name: Verify website
         run: node scripts/check.mjs
       - uses: actions/configure-pages@v5

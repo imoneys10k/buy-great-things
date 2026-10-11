@@ -13,7 +13,11 @@
 
 无框架、无构建依赖。运行 `python3 -m http.server 4173 --directory dist`，打开 `http://localhost:4173`。
 
-运行 `node scripts/check.mjs` 验证数据、资源和页面规则。修改 `dist/products.js` 更新档案；原始资料与图片出处见 `SOURCES.md`。收藏只保存在访问者浏览器，不会上传。
+运行 `npm run build && npm run check` 生成并验证公开资料、资源和页面规则。`dist/products.js` 是生成文件，公开内容源为 `content/catalog.json`；日常编辑通过私有内容后台完成。原始资料与图片出处见 `SOURCES.md`。收藏只保存在访问者浏览器，不会上传。
+
+## 内容管理后台
+
+运行 `npm run admin`，打开 `http://127.0.0.1:4287/admin/`，首次创建管理员密码。支持商品编辑、证据与附件、审核、历史版本恢复、数据库备份及一键 GitHub 发布。私有数据保存在已排除 Git 的 `.local/`。macOS 可运行 `npm run admin:service` 安装本机自动启动服务。完整操作与发布规则见 [后台说明](backend/README.md)。
 
 ## 发布
 

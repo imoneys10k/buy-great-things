@@ -1,0 +1,13 @@
+{
+  "name": "buy-great-things",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.15.0" },
+  "scripts": {
+    "admin": "node backend/server.mjs",
+    "admin:service": "node scripts/install-admin-service.mjs",
+    "build": "node scripts/build-catalog.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test backend/*.test.mjs"
+  }
+}
