@@ -19,4 +19,8 @@ for(const file of ['app.js','products.js']) {
   assert.ok(!/https?:\/\//i.test(source),'No external visitor URLs in data or app');
 }
 for (const src of html.matchAll(/(?:src|href)="\.\/([^"?#]+)"/g)) assert.ok(fs.existsSync(`dist/${src[1]}`),`Missing ${src[1]}`);
-console.log(`Verified ${products.length} product archives, assets, JavaScript syntax, evidence status and absence of external visitor links.`);
+for (const name of fs.readdirSync('dist/assets')) assert.ok(fs.statSync(`dist/assets/${name}`).size <= 100000,`${name}: image exceeds 100 KB performance budget`);
+const entryBytes = ['index.html','style.css','app.js','products.js'].reduce((sum,name)=>sum+fs.statSync(`dist/${name}`).size,0);
+assert.ok(entryBytes<=50000,'Initial page code exceeds 50 KB performance budget');
+assert.ok(!/https?:\/\//i.test(fs.readFileSync('dist/style.css','utf8')),'No external fonts or styles');
+console.log(`Verified ${products.length} archives, resources, syntax, evidence status, local-only visitor links and performance budgets (${entryBytes} bytes of page code).`);

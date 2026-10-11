@@ -15,7 +15,7 @@
 
 品牌资料图，仅作商品识别与前端展示；版权归对应品牌。全部下载到本地资产目录，前端不加载品牌网站。
 
-- HARIO：https://www.hario-usa.com/cdn/shop/files/VDC-02-TQ_1.jpg?v=1690993540&width=900
+- HARIO：https://www.hario-usa.com/cdn/shop/files/VDC-02-TQ_2.jpg?v=1690993542&width=900
 - Le Creuset：https://www.lecreuset.com/dw/image/v2/BDRT_PRD/on/demandware.static/-/Sites-le-creuset-master/default/dw9f6f3a99/images/cat_crucible_dutch_ovens/White/White_RDO_7.25qt_21177028010511_01.png?sh=900&sm=fit&sw=900
 - LAMY：https://cdn.shopify.com/s/files/1/0854/1890/1838/files/LAMY-019-safari-Fountain-pen-black-1.webp?crop=center&v=1782897103&width=900
 - Opinel：https://www.opinel.com/media/cache/sylius_shop_product_thumbnail/4b/c6/d014e1dbfc17572c1afabd3ea203.webp
