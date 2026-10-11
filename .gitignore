@@ -1,0 +1,7 @@
+.DS_Store
+.env*
+.openai/
+output/
+.playwright-cli/
+node_modules/
+*.tar.gz
